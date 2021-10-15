@@ -22,7 +22,7 @@
 #include "main.h"
 #include "assignment.h"
 int add = 0;
-int prevPinstate = 2;
+uint8_t prevPinstate;
 int main(void)
 {
   /*
@@ -67,14 +67,13 @@ int main(void)
     GPIOA_PUPDR_REG &= ~(1 << 8);
     GPIOA_PUPDR_REG &= ~(1 << 9);
     int edge =0;
-    int get;
+    int get ;
     uint8_t pin_state;
-    uint8_t prevPinstate;
 
   while (1)
   {
 	  pin_state=BUTTON_GET_STATE;
-	  get =edgeDetect(BUTTON_GET_STATE,20);
+	  get =edgeDetect(pin_state,20);
 	  if (get == 1){
 		  edge = 1; //zapni led
 	  }else if (get == 2){
