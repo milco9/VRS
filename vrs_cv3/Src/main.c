@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "assignment.h"
+#include <stdbool.h>
 int add = 0;
 uint8_t prevPinstate;
 int main(void)
@@ -68,34 +69,40 @@ int main(void)
     GPIOA_PUPDR_REG &= ~(1 << 9);
     int edge =0;
     int get ;
+    bool pom = false;
+    bool led = false;
     uint8_t pin_state;
+    uint8_t state;
 
   while (1)
   {
 	  pin_state=BUTTON_GET_STATE;
 	  get =edgeDetect(pin_state,20);
 	  if (get == 1){
-		  edge = 1; //zapni led
-	  }else if (get == 2){
-		  edge = 2; //vypni led
+		  if (led==false){
+			  pom = true;
+		  }else if (led==true){
+			  pom = false;
+		  }
 	  }
 
 
 
-	  if(edge == 1)
+	  if(pom == true)
 	  {
 		  //LED ON
 		  LED_ON;
+		  led=true;
 	  }
-	  else if(edge == 2)
+	  else if(pom ==false)
 	  {
 		  //LED OFF
 		  LED_OFF;
+		  led=false;
 	  }
   }
 
 }
-
 
 enum EDGE_TYPE edgeDetect(uint8_t pin_state, uint8_t samples){
 	uint8_t off=0x8;
