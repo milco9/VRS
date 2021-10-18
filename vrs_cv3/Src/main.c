@@ -67,7 +67,6 @@ int main(void)
     //Set no pull for GPIOB pin 4 (out)
     GPIOA_PUPDR_REG &= ~(1 << 8);
     GPIOA_PUPDR_REG &= ~(1 << 9);
-    int edge =0;
     int get ;
     bool pom = false;
     bool led = false;
