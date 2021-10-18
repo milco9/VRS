@@ -71,7 +71,6 @@ int main(void)
     bool pom = false;
     bool led = false;
     uint8_t pin_state;
-    uint8_t state;
 
   while (1)
   {
